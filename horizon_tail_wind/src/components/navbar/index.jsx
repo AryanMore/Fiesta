@@ -16,6 +16,17 @@ const Navbar = (props) => {
   const { onOpenSidenav, brandText } = props;
   const [darkmode, setDarkmode] = React.useState(false);
 
+  const [search, setSearch] = React.useState("")
+
+  const setSearchHandler = (e) => {
+    e.preventDefault() // use alternte - try using hooks 
+    // to send to pyhon --> function / props
+    /*const jsonValue = {
+      search
+    }*/
+    console.log("search value -->", search)
+  }
+
   return (
     <nav className="sticky top-4 z-40 flex flex-row flex-wrap items-center justify-between rounded-xl bg-white/10 p-2 backdrop-blur-xl dark:bg-[#0b14374d]">
       <div className="ml-[6px]">
@@ -52,11 +63,15 @@ const Navbar = (props) => {
           <p className="pl-3 pr-2 text-xl">
             <FiSearch className="h-4 w-4 text-gray-400 dark:text-white" />
           </p>
+          <form action="" onSubmit={setSearchHandler}>
           <input
             type="text"
             placeholder="Search..."
+            value={search}
+            onChange={e => setSearch(e.target.value)}
             class="block h-full w-full rounded-full bg-lightPrimary text-sm font-medium text-navy-700 outline-none placeholder:!text-gray-400 dark:bg-navy-900 dark:text-white dark:placeholder:!text-white sm:w-fit"
           />
+          </form>
         </div>
         <span
           className="flex cursor-pointer text-xl text-gray-600 dark:text-white xl:hidden"
