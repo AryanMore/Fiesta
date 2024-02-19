@@ -44,16 +44,31 @@ trends_cat = dict()
 
 for c , k in zip(mama_earth_data['PRODUCT_CATEGORY'] , mama_earth_data['SEASON']):
    c = c.replace(" " , "")
-   if(k in trends_cat and c in trends_cat[k]):
-      trends_cat[k][c] += 1
+   if(c in trends_cat and k in trends_cat[c]):
+      trends_cat[c][k] += 1
    else:
-      if(k in trends_cat):
-        trends_cat[k][c] = 1
+      if(c in trends_cat):
+        trends_cat[c][k] = 1
       else:
-         trends_cat[k] = dict()
+         trends_cat[c] = dict()
 
 for season, categories in trends_cat.items():
     trends_cat[season] = dict(sorted(categories.items(), key=lambda item: item[1]))
+
+# First, let's find the total count for each season
+season_total_counts = {}
+for season, categories in trends_cat.items():
+    total_count = sum(categories.values())
+    season_total_counts[season] = total_count
+
+# Now, let's convert the counts to percentages for each category
+for season, categories in trends_cat.items():
+    for category, count in categories.items():
+        percentage = (count / season_total_counts[season]) * 100
+        trends_cat[season][category] = round(percentage)
+
+# Voila! Your categories now have the percentage of their sales in their respective seasons. 🌟✨
+
 
 
 #print(trends_cat)

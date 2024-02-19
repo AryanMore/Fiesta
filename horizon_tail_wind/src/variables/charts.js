@@ -163,36 +163,165 @@ export const pieChartData = [s, w, m];
 
 // Summer Winter and Monsoon Analysis of the Product Category
 
-
 const category_trends = require('./trends_category.json');
+const seasons = ["Winter", "Summer", "Monsoon"];
+var categories_names = [];
+const seasonArrays = {
+    Winter: [],
+    Summer: [],
+    Monsoon: [],
+  };
+  
+  seasons.forEach(season => {
+    for (const [category, data] of Object.entries(category_trends)) {
+      const value = data[season];
+      if (value !== undefined && value !== 0) {
+        seasonArrays[season].push(value);
+      }
+    }
+  });
+  
+  // Print the results
+  console.log(seasonArrays.Winter);
+  console.log(seasonArrays.Summer);
+  console.log(seasonArrays.Monsoon);
 
-const unknown = category_trends['Unknown'];
-const monsoon = category_trends['Monsoon'];
-const summer = category_trends['Summer'];
-const winter = category_trends['Winter'];
+var i =0;
+for (const[keys , vales] of Object.entries(category_trends))
+{
+    if(keys != 'Other')
+    {
+    categories_names[i] = keys;
+    //console.log(categories_names[i]);
+    i++;
+    }
+}
 
-// Now, let's extract the magic values!
-const unknownValues = Object.values(unknown);
-const monsoonValues = Object.values(monsoon);
-const summerValues = Object.values(summer);
-const winterValues = Object.values(winter);
-
-const categories_names = Object.keys(monsoon);
-
-export const barChartDataWeeklyRevenue = [
+export const barChartDataWeeklyRevenue_category_trend = [
   {
     name: "Summer",
-    data: summerValues,
+    data: seasonArrays.Summer,
     color: "#6AD2Fa",
   },
   {
     name: "Winter",
-    data: winterValues,
+    data: seasonArrays.Winter,
     color: "#4318FF",
   },
   {
     name: "Monsoon",
-    data: monsoonValues,
+    data: seasonArrays.Monsoon,
+    color: "#EFF4FB",
+  },
+];
+
+export const barChartOptionsWeeklyRevenue_category_trend = {
+  chart: {
+    stacked: true,
+    toolbar: {
+      show: false,
+    },
+  },
+  // colors:['#ff3322','#faf']
+  tooltip: {
+    style: {
+      fontSize: "12px",
+      fontFamily: undefined,
+      backgroundColor: "#000000"
+    },
+    theme: 'dark',
+    onDatasetHover: {
+      style: {
+        fontSize: "12px",
+        fontFamily: undefined,
+      },
+    },
+  },
+  xaxis: {
+    categories: categories_names,
+    show: false,
+    labels: {
+      show: true,
+      style: {
+        colors: "#A3AED0",
+        fontSize: "14px",
+        fontWeight: "500",
+      },
+    },
+    axisBorder: {
+      show: false,
+    },
+    axisTicks: {
+      show: false,
+    },
+  },
+  yaxis: {
+    show: false,
+    color: "black",
+    labels: {
+      show: false,
+      style: {
+        colors: "#A3AED0",
+        fontSize: "14px",
+        fontWeight: "500",
+      },
+    },
+  },
+
+  grid: {
+    borderColor: "rgba(163, 174, 208, 0.3)",
+    show: true,
+    yaxis: {
+      lines: {
+        show: false,
+        opacity: 0.5,
+      },
+    },
+    row: {
+      opacity: 0.5,
+    },
+    xaxis: {
+      lines: {
+        show: false,
+      },
+    },
+  },
+  fill: {
+    type: "solid",
+    colors: ["#5E37FF", "#6AD2FF", "#E1E9F8"],
+  },
+  legend: {
+    show: false,
+  },
+  colors: ["#5E37FF", "#6AD2FF", "#E1E9F8"],
+  dataLabels: {
+    enabled: false,
+  },
+  plotOptions: {
+    bar: {
+      borderRadius: 10,
+      columnWidth: "20px",
+    },
+  },
+};
+
+
+// For Category Wise Sentimental Analysis
+
+export const barChartDataWeeklyRevenue = [
+  {
+    name: "Summer",
+    data: seasonArrays.Summer,
+    color: "#6AD2Fa",
+  },
+  {
+    name: "Winter",
+    data: seasonArrays.Winter,
+    color: "#4318FF",
+  },
+  {
+    name: "Monsoon",
+    data: seasonArrays.Monsoon,
     color: "#EFF4FB",
   },
 ];
