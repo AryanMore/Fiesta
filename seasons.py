@@ -74,13 +74,13 @@ my_data = {
 }
 
 # Creating JSON file for the display of trends of products wrt to seasons
-with open('C:/Users/Kamalkant More/Documents/TensorFiesta/horizon-tailwind-react/src/variables/trends.json', 'w') as json_file:
+with open('trends.json', 'w') as json_file:
     # Step 4: Dump your data into the file
     json.dump(my_data, json_file)
 
 
 #Creating JSON file for the permenenat display of category data
-with open('C:/Users/Kamalkant More/Documents/TensorFiesta/horizon-tailwind-react/src/variables/trends_category.json', 'w') as json_file:
+with open('trends_category.json', 'w') as json_file:
     # Step 4: Dump your data into the file
     json.dump(trends_cat, json_file)
 
