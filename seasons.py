@@ -1,8 +1,9 @@
 import pandas as pd
 import numpy as np
 import json
+import math
 # Load your dataset
-mama_earth_data = pd.read_csv('Reviews Data.csv')
+mama_earth_data = pd.read_csv('C:/Users/Kamalkant More/Documents/Hackathon_work/Fiesta/Reviews Data.csv')
 mama_earth_data = mama_earth_data[~mama_earth_data.index.duplicated(keep='first')]
 #print(mama_earth_data.head())
 
@@ -42,13 +43,19 @@ category_r = 0
 trends_cat = dict()
 
 for c , k in zip(mama_earth_data['PRODUCT_CATEGORY'] , mama_earth_data['SEASON']):
-   if(c in trends_cat and k in trends_cat[c]):
-      trends_cat[c][k] += 1
+   c = c.replace(" " , "")
+   if(k in trends_cat and c in trends_cat[k]):
+      trends_cat[k][c] += 1
    else:
-      if(c in trends_cat):
-        trends_cat[c][k] = 1
+      if(k in trends_cat):
+        trends_cat[k][c] = 1
       else:
-         trends_cat[c] = dict()
+         trends_cat[k] = dict()
+
+for season, categories in trends_cat.items():
+    trends_cat[season] = dict(sorted(categories.items(), key=lambda item: item[1]))
+
+
 #print(trends_cat)
 
 for i , j in zip(mama_earth_data['SKU'] , mama_earth_data['SEASON']):
@@ -68,9 +75,9 @@ print("Winter Sales are {0} Summer Sales are {1} Monsoon Sales are {2}".format((
 
 # Step 2: Prepare your data (a dictionary in this case)
 my_data = {
-    "Winter": int((product_w/total_sales_pp)*100),
-    "Summer": int((product_s/total_sales_pp)*100),
-    "Monsoon": int((product_r/total_sales_pp)*100),
+    "Winter": round((product_w/total_sales_pp)*100),
+    "Summer": round((product_s/total_sales_pp)*100),
+    "Monsoon": round((product_r/total_sales_pp)*100),
 }
 
 # Creating JSON file for the display of trends of products wrt to seasons

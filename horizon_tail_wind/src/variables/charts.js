@@ -103,7 +103,7 @@ export const barChartOptionsDailyTraffic = {
 };
 
 export const pieChartOptions = {
-  labels: ["Your files", "System", "Empty"],
+  labels: ["Summer", "Winter", "Monsoon"],
   colors: ["#4318FF", "#6AD2FF", "#EFF4FB"],
   chart: {
     width: "50px",
@@ -146,22 +146,53 @@ export const pieChartOptions = {
   },
 };
 
-export const pieChartData = [63, 25, 12];
+var s =0;
+var w = 0;
+var m = 0;
+//Getting The Seasons Data From the Python Script
+
+const product_trends = require('./trends.json');
+s = product_trends.Summer;
+w = product_trends.Winter;
+m = product_trends.Monsoon;
+
+
+export const pieChartData = [s, w, m];
+
+
+
+// Summer Winter and Monsoon Analysis of the Product Category
+
+
+const category_trends = require('./trends_category.json');
+
+const unknown = category_trends['Unknown'];
+const monsoon = category_trends['Monsoon'];
+const summer = category_trends['Summer'];
+const winter = category_trends['Winter'];
+
+// Now, let's extract the magic values!
+const unknownValues = Object.values(unknown);
+const monsoonValues = Object.values(monsoon);
+const summerValues = Object.values(summer);
+const winterValues = Object.values(winter);
+
+const categories_names = Object.keys(monsoon);
 
 export const barChartDataWeeklyRevenue = [
   {
-    name: "PRODUCT A",
-    data: [400, 370, 330, 390, 320, 350, 360, 320, 380],
+    name: "Summer",
+    data: summerValues,
     color: "#6AD2Fa",
   },
   {
-    name: "PRODUCT B",
-    data: [400, 370, 330, 390, 320, 350, 360, 320, 380],
+    name: "Winter",
+    data: winterValues,
     color: "#4318FF",
   },
   {
-    name: "PRODUCT C",
-    data: [400, 370, 330, 390, 320, 350, 360, 320, 380],
+    name: "Monsoon",
+    data: monsoonValues,
     color: "#EFF4FB",
   },
 ];
@@ -189,7 +220,7 @@ export const barChartOptionsWeeklyRevenue = {
     },
   },
   xaxis: {
-    categories: ["17", "18", "19", "20", "21", "22", "23", "24", "25"],
+    categories: categories_names,
     show: false,
     labels: {
       show: true,
@@ -255,6 +286,8 @@ export const barChartOptionsWeeklyRevenue = {
     },
   },
 };
+
+
 
 export const lineChartDataTotalSpent = [
   {
