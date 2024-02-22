@@ -182,7 +182,7 @@ const seasonArrays = {
   });
   
   // Print the results
-  console.log(seasonArrays.Winter);
+  console.log("seasonArrays.Winter ->",seasonArrays.Winter);
   console.log(seasonArrays.Summer);
   console.log(seasonArrays.Monsoon);
 
@@ -200,6 +200,7 @@ for (const[keys , vales] of Object.entries(category_trends))
 export const barChartDataWeeklyRevenue_category_trend = [
   {
     name: "Summer",
+    // data: seasonArrays.Summer,
     data: seasonArrays.Summer,
     color: "#6AD2Fa",
   },

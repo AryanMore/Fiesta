@@ -6,6 +6,7 @@ import navbarimage from "assets/img/layout/Navbar.png";
 import { BsArrowBarUp } from "react-icons/bs";
 import { FiSearch } from "react-icons/fi";
 import { RiMoonFill, RiSunFill } from "react-icons/ri";
+import axios from 'axios'
 import {
   IoMdNotificationsOutline,
   IoMdInformationCircleOutline,
@@ -18,13 +19,16 @@ const Navbar = (props) => {
 
   const [search, setSearch] = React.useState("")
 
-  const setSearchHandler = (e) => {
+  const setSearchHandler = async (e) => {
     e.preventDefault() // use alternte - try using hooks 
     // to send to pyhon --> function / props
     /*const jsonValue = {
       search
     }*/
     console.log("search value -->", search)
+    axios.post("http://127.0.0.1:5000/search-input", {data : {searchInput :search}}).then((response) => {
+      console.log("response -->", response)
+    })
   }
 
   return (
