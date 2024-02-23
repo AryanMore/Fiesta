@@ -309,20 +309,53 @@ export const barChartOptionsWeeklyRevenue_category_trend = {
 
 // For Category Wise Sentimental Analysis
 
+
+const categorySentiments = require('./sentiment_analysis_results.json');
+const sentiments = ["Positive", "Negative", "Neutral"];
+var categoriesNames_Overall = [];
+const sentimentArrays = {
+    Positive: [],
+    Negative: [],
+    Neutral: []
+};
+
+sentiments.forEach(sentiment => {
+    for (const [category, data] of Object.entries(categorySentiments)) {
+        const value = data[sentiment];
+        if (value !== undefined && value !== 0) {
+            sentimentArrays[sentiment].push(value);
+        }
+    }
+});
+
+// Print the results
+console.log("Sentiment Arrays for Positive:", sentimentArrays.Positive);
+console.log("Sentiment Arrays for Negative:", sentimentArrays.Negative);
+console.log("Sentiment Arrays for Neutral:", sentimentArrays.Neutral);
+
+var i = 0;
+for (const [keys, values] of Object.entries(categorySentiments)) {
+    if (keys !== 'Other') {
+        categoriesNames_Overall[i] = keys;
+        //console.log(categoriesNames[i]);
+        i++;
+    }
+}
+
 export const barChartDataWeeklyRevenue = [
   {
-    name: "Summer",
-    data: seasonArrays.Summer,
+    name: "Positive",
+    data: sentimentArrays.Positive,
     color: "#6AD2Fa",
   },
   {
-    name: "Winter",
-    data: seasonArrays.Winter,
+    name: "Neutral",
+    data: sentimentArrays.Neutral,
     color: "#4318FF",
   },
   {
-    name: "Monsoon",
-    data: seasonArrays.Monsoon,
+    name: "Negative",
+    data: sentimentArrays.Negative,
     color: "#EFF4FB",
   },
 ];
@@ -350,7 +383,7 @@ export const barChartOptionsWeeklyRevenue = {
     },
   },
   xaxis: {
-    categories: categories_names,
+    categories: categoriesNames_Overall,
     show: false,
     labels: {
       show: true,

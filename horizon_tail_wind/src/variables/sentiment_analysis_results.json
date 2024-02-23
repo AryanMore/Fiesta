@@ -1,0 +1,37 @@
+{
+    "combo": {
+        "Positive": 78,
+        "Neutral": 22,
+        "Negative": 0
+    },
+    "body": {
+        "Positive": 86,
+        "Neutral": 13,
+        "Negative": 1
+    },
+    "face": {
+        "Positive": 85,
+        "Neutral": 14,
+        "Negative": 1
+    },
+    "hair": {
+        "Positive": 85,
+        "Neutral": 14,
+        "Negative": 1
+    },
+    "kit": {
+        "Positive": 84,
+        "Neutral": 15,
+        "Negative": 1
+    },
+    "pregenancy": {
+        "Positive": 80,
+        "Neutral": 19,
+        "Negative": 2
+    },
+    "skin": {
+        "Positive": 86,
+        "Neutral": 13,
+        "Negative": 1
+    }
+}

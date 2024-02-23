@@ -29,7 +29,7 @@ def check(id):
 
 def tp(id):
     # Load your dataset
-    mama_earth_data = pd.read_csv('C:/Users/Kamalkant More/Documents/Hackathon_work/Fiesta/Reviews Data.csv')
+    mama_earth_data = pd.read_csv('C:/Users/Kamalkant More/Documents/Hackathon_work/Fiesta/Reviews Data_Origial.csv')
     mama_earth_data = mama_earth_data[~mama_earth_data.index.duplicated(keep='first')]
     #print(mama_earth_data.head())
 
