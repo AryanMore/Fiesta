@@ -1,0 +1,1 @@
+df.fillna('', inplace=True)
