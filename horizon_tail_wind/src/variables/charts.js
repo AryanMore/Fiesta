@@ -199,18 +199,18 @@ for (const[keys , vales] of Object.entries(category_trends))
 
 export const barChartDataWeeklyRevenue_category_trend = [
   {
-    name: "Summer",
+    name: "Summer  in %",
     // data: seasonArrays.Summer,
     data: seasonArrays.Summer,
     color: "#6AD2Fa",
   },
   {
-    name: "Winter",
+    name: "Winter  in %",
     data: seasonArrays.Winter,
     color: "#4318FF",
   },
   {
-    name: "Monsoon",
+    name: "Monsoon  in %",
     data: seasonArrays.Monsoon,
     color: "#EFF4FB",
   },
@@ -344,17 +344,17 @@ for (const [keys, values] of Object.entries(categorySentiments)) {
 
 export const barChartDataWeeklyRevenue = [
   {
-    name: "Positive",
+    name: "Positive in %",
     data: sentimentArrays.Positive,
     color: "#6AD2Fa",
   },
   {
-    name: "Neutral",
+    name: "Neutral  in %",
     data: sentimentArrays.Neutral,
     color: "#4318FF",
   },
   {
-    name: "Negative",
+    name: "Negative  in %",
     data: sentimentArrays.Negative,
     color: "#EFF4FB",
   },
