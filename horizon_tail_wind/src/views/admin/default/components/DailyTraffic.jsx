@@ -5,7 +5,7 @@ import { MdArrowDropUp } from "react-icons/md";
 import Card from "components/card";
 const DailyTraffic = () => {
   return (
-    <Card extra="pb-7 p-[20px]">
+    <Card extra="pb-7 p-[20px] ">
       <div className="flex flex-row justify-between">
         <div className="ml-1 pt-2">
           <p className="text-sm font-medium leading-4 text-gray-600">

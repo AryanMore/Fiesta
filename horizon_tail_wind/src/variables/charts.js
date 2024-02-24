@@ -1,7 +1,19 @@
+const data = require("./monthly_review.json")
+var month_numberes = []
+var monthly_Reviews = []
+var i = 0
+for (const[k , val] of Object.entries(data))
+{
+  month_numberes[i] = k;
+  monthly_Reviews[i] = val
+  i++;
+}
+
+
 export const barChartDataDailyTraffic = [
   {
     name: "Daily Traffic",
-    data: [20, 30, 40, 20, 45, 50, 30],
+    data: monthly_Reviews,
   },
 ];
 
@@ -26,7 +38,7 @@ export const barChartOptionsDailyTraffic = {
     theme: "dark",
   },
   xaxis: {
-    categories: ["00", "04", "08", "12", "14", "16", "18"],
+    categories: month_numberes,
     show: false,
     labels: {
       show: true,
@@ -104,7 +116,7 @@ export const barChartOptionsDailyTraffic = {
 
 export const pieChartOptions = {
   labels: ["Summer", "Winter", "Monsoon"],
-  colors: ["#4318FF", "#6AD2FF", "#EFF4FB"],
+  colors: ["#4318FF", "#6AD2FF", "#959bf6"],
   chart: {
     width: "50px",
   },
@@ -133,7 +145,7 @@ export const pieChartOptions = {
     },
   },
   fill: {
-    colors: ["#4318FF", "#6AD2FF", "#EFF4FB"],
+    colors: ["#4318FF", "#6AD2FF", "#959bf6"],
   },
   tooltip: {
     enabled: true,
@@ -212,7 +224,7 @@ export const barChartDataWeeklyRevenue_category_trend = [
   {
     name: "Monsoon  in %",
     data: seasonArrays.Monsoon,
-    color: "#EFF4FB",
+    color: "#959bf6",
   },
 ];
 
@@ -356,7 +368,7 @@ export const barChartDataWeeklyRevenue = [
   {
     name: "Negative  in %",
     data: sentimentArrays.Negative,
-    color: "#EFF4FB",
+    color: "#959bf6",
   },
 ];
 

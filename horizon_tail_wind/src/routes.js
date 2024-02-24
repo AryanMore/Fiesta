@@ -50,11 +50,14 @@ const routes = [
     component: <Profile />,
   },
   {
-    name: "Sign In",
-    layout: "/auth",
-    path: "sign-in",
+    name: "API",
+    //layout: "/auth",
+    //path: "sign-in",
+    layout: "/admin",
+    path: "profile",
     icon: <MdLock className="h-6 w-6" />,
-    component: <SignIn />,
+    //component: <SignIn />,
+    component: <Profile />,
   },
   // {
   //   name: "RTL Admin",

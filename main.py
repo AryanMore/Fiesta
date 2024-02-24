@@ -12,6 +12,9 @@ app = Flask(__name__)
 
 CORS(app)  # This will enable CORS for all routes
 
+mama_earth_data = pd.read_csv('C:/Users/Kamalkant More/Documents/Hackathon_work/Fiesta/Reviews Data_Origial.csv')
+mama_earth_data['REVIEW_DATE'] = pd.to_datetime(mama_earth_data['REVIEW_DATE'])
+
 @app.route('/search-input', methods=["POST"])
 def sampleTest():
     searchInput = request.get_json() #input from req.body
@@ -19,6 +22,8 @@ def sampleTest():
     #seasons.tp(searchInput)
     print("Search -->", searchInput)
     check(searchInput)
+    monthlyReviews(searchInput["data"]["searchInput"])
+    details(searchInput["data"]["searchInput"])
     tp(searchInput["data"]["searchInput"])
     #seasons.tp(searchInput)
     return {"success":True, "backendPython":"Haha"}
@@ -27,12 +32,52 @@ def check(id):
     print("Data in below format")
     print(id["data"]["searchInput"])
 
+# Product Name and Sales
+def details(id):
+    product_name = ""
+    sales_price = 0
+    for index , sku in enumerate(mama_earth_data["SKU"]):
+        if(id == sku):
+            sales_price += float(mama_earth_data['PRICE'][index])
+            if(product_name == ""):
+                product_name = mama_earth_data['PRODUCT_NAME'][index]
+    data = {"Product_Name" : product_name,
+            "Total_Sales" : sales_price,
+            "SKU" : id}
+    with open("C:/Users/Kamalkant More/Documents/Hackathon_work/Fiesta/horizon_tail_wind/src/views/admin/default/product_info.json" , 'w') as jsonFile:
+        json.dump(data , jsonFile)
+        
+
+
+#JSON for monthly Reviews        
+def monthlyReviews(id):
+    monthWise_reviews = dict()
+    for index , sku in enumerate(mama_earth_data['SKU']):
+        if(sku == id):
+            month = mama_earth_data['REVIEW_DATE'][index].month
+            review_Count = mama_earth_data['REVIEW_COUNT'][index]
+            if(not mama_earth_data['REVIEW_COUNT'].empty):
+                if(month in monthWise_reviews):
+                    monthWise_reviews[month] += review_Count
+                else:
+                    monthWise_reviews[month] = review_Count
+    months = list(monthWise_reviews.keys())
+    months.sort()
+    sortedMonths = {i: monthWise_reviews[i] for i in months}
+    print(sortedMonths)
+
+    with open("C:/Users/Kamalkant More/Documents/Hackathon_work/Fiesta/horizon_tail_wind/src/variables/monthly_review.json" , 'w') as json_File:
+        json.dump(sortedMonths, json_File)
+    print("Created JSON for monthlyREviews")
+
+
+
 def tp(id):
     # Load your dataset
     mama_earth_data = pd.read_csv('C:/Users/Kamalkant More/Documents/Hackathon_work/Fiesta/Reviews Data_Origial.csv')
     mama_earth_data = mama_earth_data[~mama_earth_data.index.duplicated(keep='first')]
     #print(mama_earth_data.head())
-
+    
 
 
 
@@ -110,8 +155,6 @@ def tp(id):
 
     #print(season_counts)
     #print(mama_earth_data.head())
-
-
 
     # Step 2: Prepare your data (a dictionary in this case)
     my_data = {

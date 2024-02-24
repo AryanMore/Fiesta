@@ -1,4 +1,4 @@
-import pandas as pd
+"""import pandas as pd
 import json
 from textblob import TextBlob
 
@@ -46,3 +46,41 @@ with open('C:/Users/Kamalkant More/Documents/Hackathon_work/Fiesta/horizon_tail_
     json.dump(results, f, indent=4)
 
 print("JSON file generated successfully!")
+"""
+import pandas as pd
+import plotly.express as px
+import json
+from collections import OrderedDict
+
+mama_earth_data = pd.read_csv('C:/Users/Kamalkant More/Documents/Hackathon_work/Fiesta/Reviews Data_Origial.csv')
+
+mama_earth_data['REVIEW_DATE'] = pd.to_datetime(mama_earth_data['REVIEW_DATE'])
+#mama_earth_data.set_index('REVIEW_DATE', inplace=True)  # Set 'REVIEW_DATE' as the index
+id = "8906087770534"
+monthWise_reviews = dict()
+
+for index , sku in enumerate(mama_earth_data['SKU']):
+    if(sku == id):
+        month = mama_earth_data['REVIEW_DATE'][index].month
+        review_Count = mama_earth_data['REVIEW_COUNT'][index]
+        if(not mama_earth_data['REVIEW_COUNT'].empty):
+            if(month in monthWise_reviews):
+                monthWise_reviews[month] += review_Count
+            else:
+                monthWise_reviews[month] = review_Count
+print("DOne")
+months = list(monthWise_reviews.keys())
+months.sort()
+sortedMonths = {i: monthWise_reviews[i] for i in months}
+print(sortedMonths)
+
+with open("C:/Users/Kamalkant More/Documents/Hackathon_work/Fiesta/horizon_tail_wind/src/variables/monthly_review.json" , 'w') as json_File:
+    json.dump(sortedMonths, json_File)
+
+#Drop duplicate timestamps (if any)
+#mama_earth_data = mama_earth_data[~mama_earth_data.index.duplicated(keep='first')]
+
+#monthly_review_count = mama_earth_data.resample('M').size().reset_index(name='Review Count')
+#print(monthly_review_count)
+
+
