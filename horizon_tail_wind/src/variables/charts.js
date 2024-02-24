@@ -104,7 +104,7 @@ export const barChartOptionsDailyTraffic = {
 
 export const pieChartOptions = {
   labels: ["Summer", "Winter", "Monsoon"],
-  colors: ["#4318FF", "#6AD2FF", "#EFF4FB"],
+  colors: ["#4318FF", "#6AD2FF", "#959bf6"],
   chart: {
     width: "50px",
   },
@@ -133,7 +133,7 @@ export const pieChartOptions = {
     },
   },
   fill: {
-    colors: ["#4318FF", "#6AD2FF", "#EFF4FB"],
+    colors: ["#4318FF", "#6AD2FF", "#959bf6"],
   },
   tooltip: {
     enabled: true,
@@ -212,7 +212,7 @@ export const barChartDataWeeklyRevenue_category_trend = [
   {
     name: "Monsoon  in %",
     data: seasonArrays.Monsoon,
-    color: "#EFF4FB",
+    color: "#959bf6",
   },
 ];
 
@@ -356,7 +356,7 @@ export const barChartDataWeeklyRevenue = [
   {
     name: "Negative  in %",
     data: sentimentArrays.Negative,
-    color: "#EFF4FB",
+    color: "#959bf6",
   },
 ];
 
