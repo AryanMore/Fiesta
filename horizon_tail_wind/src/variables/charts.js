@@ -38,7 +38,7 @@ export const barChartOptionsDailyTraffic = {
     theme: "dark",
   },
   xaxis: {
-    categories: month_numberes,
+    categories: [1,2,3,4,5,6,7,8,9,10,11,12],
     show: false,
     labels: {
       show: true,
